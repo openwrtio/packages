@@ -6,17 +6,21 @@
 #
 
 include $(TOPDIR)/rules.mk
-
 PKG_NAME:=wifidog
-PKG_VERSION:=20090925
-PKG_RELEASE:=1
+PKG_VERSION:=1.2.1
+PKG_RELEASE=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:= @SF/$(PKG_NAME)
-PKG_MD5SUM:=e3ecacba67a91b6ea3c1072ba6c5a0b4
+PKG_LICENSE:=GPL-2.0
+PKG_MAINTAINER:=sinkcup <sinkcup@163.com>
+
+PKG_SOURCE:=$(PKG_NAME)-gateway-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=http://downloads.openwrt.io/dl/ \
+    https://github.com/wifidog/wifidog-gateway/releases/download/1.2.1/
+PKG_MD5SUM:=3c9c35968f154b1c9224245a5d708d5f
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-gateway-$(PKG_VERSION)
 
 PKG_FIXUP:=autoreconf
-PKG_INSTALL:=1
+PKG_INSTALL:=0
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -42,16 +46,15 @@ endef
 
 define Package/wifidog/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/scripts/init.d/wifidog $(1)/usr/bin/wifidog-init
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/wifidog $(1)/usr/bin/
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/wdctl $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libhttpd.so* $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) ./files/wifidog.conf $(1)/etc/
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/wifidog.conf $(1)/etc/
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/wifidog-msg.html $(1)/etc/
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/$(PKG_NAME).init $(1)/etc/init.d/wifidog
+	$(INSTALL_BIN) ./files/wifidog.init $(1)/etc/init.d/wifidog
 endef
 
 $(eval $(call BuildPackage,wifidog))
