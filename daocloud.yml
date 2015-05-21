@@ -8,7 +8,7 @@ install:
     - echo "This is an install segment"
     - echo "Here, we usually run scripts to setup a base environment"
     - sudo apt-get update -qq
-    - sudo apt-get install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc
+    - sudo apt-get install -y subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc
     - bash install_openwrt_sdk.sh
     - ln -s $PWD ~/openwrt/hc5761/package/feeds
 
