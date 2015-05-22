@@ -24,7 +24,7 @@ before_script:
     - git diff --name-only HEAD^ HEAD | xargs dirname
 
 script:
-    - "This is an script segment"
+    - echo "This is an script segment"
     - pwd
     - ls
     - cd ~/openwrt/hc5761
