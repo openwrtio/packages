@@ -9,18 +9,14 @@ install:
     - echo "Here, we usually run scripts to setup a base environment"
     - pwd
     - ls
-    - sudo apt-get update -qq
-    - sudo apt-get install -y wget curl python git subversion build-essential libncurses5-dev zlib1g-dev gawk ccache gettext libssl-dev xsltproc
 
 before_script:
     - echo $MYENV
     - echo "This is an before_script segment"
     - echo "Here, we usually run scripts to prepare our test"
     - pwd
+    - whoami
     - ls
-    - ls ./install_openwrt_sdk.sh
-    - bash install_openwrt_sdk.sh
-    - ln -s $PWD ~/openwrt/hc5761/package/feeds
     - git diff --name-only HEAD^ HEAD | xargs dirname
 
 script:
