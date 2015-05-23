@@ -9,8 +9,7 @@ RUN \
   mkdir -p ~/Downloads/ \
   wget -O ~/Downloads/hc5761-20140619.tar.gz --user='yangzhou' --password='YZPassword01!' ftp://daocloud.openwrt.io/hc5761-20140619.tar.gz \
   mkdir -p ~/openwrt/ \
-  tar -zxvf ~/Downloads/hc5761-20140619.tar.gz -C ~/openwrt/
+  tar -zxvf ~/Downloads/hc5761-20140619.tar.gz -C ~/openwrt/ \
   mkdir -p ~/openwrt/hc5761/package/feeds
 
 WORKDIR ~/openwrt/hc5761/package/feeds
-
