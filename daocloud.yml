@@ -17,6 +17,7 @@ before_script:
     - pwd
     - whoami
     - ls
+    - ln -s $PWD/* ~/openwrt/hc5761/package/feeds/
     - git diff --name-only HEAD^ HEAD | xargs dirname
 
 script:
