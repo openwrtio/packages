@@ -1,8 +1,10 @@
 FROM ubuntu:14.04
 MAINTAINER sinkcup <sinkcup@163.com>
 
-# Install.
+ADD sources.list-cn /etc/apt/sources.list
+
 RUN \
+  ping -c 2 daocloud.openwrt.io && \
   apt-get update && \
   apt-get -y upgrade && \
   apt-get install -y subversion git build-essential libncurses5-dev zlib1g-dev gawk unzip gettext libssl-dev intltool openjdk-6-jre-headless optipng xsltproc ccache python wget curl && \
