@@ -1,4 +1,4 @@
-image:  sinkcup/openwrtio-packages:docker-1540230
+image:  openwrtio/openwrt-sdk-gee-ralink:0.1.0
 
 env:
     - MYENV = "hello openwrt"
