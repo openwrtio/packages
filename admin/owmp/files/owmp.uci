@@ -1,0 +1,3 @@
+config 'host' 'server'
+option host ''
+option port ''
