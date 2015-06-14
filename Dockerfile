@@ -1,8 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER sinkcup <sinkcup@163.com>
 
-ADD sources.list-cn /etc/apt/sources.list
-
 RUN \
   ping -c 2 daocloud.openwrt.io && \
   apt-get update && \
