@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 PKG_NAME:=owmp
-PKG_VERSION:=0.2.0
+PKG_VERSION:=0.3.0
 PKG_RELEASE=1
 
 PKG_LICENSE:=GPL-2.0
@@ -16,7 +16,7 @@ PKG_MAINTAINER:=sinkcup <sinkcup@163.com>
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://downloads.openwrt.io/dl/ \
     https://github.com/openwrtio/owmp/releases/download/$(PKG_VERSION)/
-PKG_MD5SUM:=dadf4515850f53e9f04e589415c17ae1
+PKG_MD5SUM:=ca770f3f3d8afaed1c06a34e5dac3a1e
 
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=0
