@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 PKG_NAME:=wifidog
 PKG_VERSION:=1.2.1
-PKG_RELEASE=1
+PKG_RELEASE=2
 
 PKG_LICENSE:=GPL-2.0
 PKG_MAINTAINER:=sinkcup <sinkcup@163.com>
@@ -46,6 +46,7 @@ endef
 
 define Package/wifidog/install
 	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/scripts/init.d/wifidog $(1)/usr/bin/wifidog-init
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/wifidog $(1)/usr/bin/
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/wdctl $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/usr/lib
