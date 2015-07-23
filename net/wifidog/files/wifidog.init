@@ -1,11 +1,11 @@
 #!/bin/sh /etc/rc.common
-# Copyright (C) 2006 OpenWrt.org
+
 START=65
 EXTRA_COMMANDS="status"
 EXTRA_HELP="        status Print the status of the service"
 
 start() {
-    /usr/bin/wifidog start
+    /usr/bin/wifidog-init start
 }
 
 stop() {
@@ -14,4 +14,15 @@ stop() {
 
 status() {
     /usr/bin/wdctl status
+}
+
+restart() {
+    stop
+    # iptables清理需要时间，所以sleep
+    sleep 2
+    start
+}
+
+reload() {
+    restart
 }
