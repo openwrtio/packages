@@ -8,14 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shflags
-PKG_VERSION:=2012-06-11
-PKG_RELEASE=$(PKG_SOURCE_VERSION)
+PKG_SOURCE_VERSION:=1.0.3
+PKG_VERSION:=$(PKG_SOURCE_VERSION)
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://dev.freecwmp.org/shflags-clone/
+PKG_SOURCE_URL:=git@github.com:kward/shflags.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=4411ea9115802b86ffee68a2cbbbbf143dfeebbd
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -42,7 +42,7 @@ endef
 
 define Package/shflags/install
 	$(INSTALL_DIR) $(1)/usr/share/shflags
-	$(CP) $(PKG_BUILD_DIR)/source/1.0/src/shflags  $(1)/usr/share/shflags/shflags.sh
+	$(CP) $(PKG_BUILD_DIR)/src/shflags  $(1)/usr/share/shflags/shflags.sh
 endef
 
 $(eval $(call BuildPackage,shflags))
