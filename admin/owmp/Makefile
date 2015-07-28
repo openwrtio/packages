@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 PKG_NAME:=owmp
-PKG_VERSION:=0.3.0
+PKG_VERSION:=0.4.0
 PKG_RELEASE=1
 
 PKG_LICENSE:=GPL-2.0
@@ -16,7 +16,7 @@ PKG_MAINTAINER:=sinkcup <sinkcup@163.com>
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://downloads.openwrt.io/dl/ \
     https://github.com/openwrtio/owmp/releases/download/$(PKG_VERSION)/
-PKG_MD5SUM:=ca770f3f3d8afaed1c06a34e5dac3a1e
+PKG_MD5SUM:=88317da23e065b283f95290324ba8aee
 
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=0
@@ -48,9 +48,9 @@ endef
 
 define Package/$(PKG_NAME)/postinst
 #!/bin/sh
+touch /etc/crontabs/root
 r=`grep '/usr/bin/owmp' /etc/crontabs/root`
-if [ "$r" == "" ]; then
-    touch /etc/crontabs/root
+if [ x"$r" = "x" ]; then
     echo '* * * * * /usr/bin/owmp' >> /etc/crontabs/root
 fi
 exit 0
