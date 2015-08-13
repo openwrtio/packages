@@ -1,31 +1,30 @@
-image:  openwrtio/openwrt-sdk-gee-ralink:0.1.0
-
-env:
-    - MYENV = "hello openwrt"
+image: openwrtio/openwrt-sdk-gee-ralink
 
 install:
-    - echo $MYENV
-    - echo "This is an install segment"
-    - echo "Here, we usually run scripts to setup a base environment"
     - pwd
     - ls
+    - wget -O /tmp/qiniu-devtools-linux_amd64-current.tar.gz http://devtools.qiniu.io/qiniu-devtools-linux_amd64-current.tar.gz
+    - tar -zxvf /tmp/qiniu-devtools-linux_amd64-current.tar.gz -C /usr/bin/
 
 before_script:
-    - echo $MYENV
-    - echo "This is an before_script segment"
-    - echo "Here, we usually run scripts to prepare our test"
     - pwd
-    - whoami
     - ls
-    - ln -s $PWD/* ~/openwrt/hc5761/package/feeds/
-    - git diff --name-only HEAD^ HEAD | xargs dirname
+    - mkdir -p /root/openwrt/hc5761/package/feeds
+    - ln -s $PWD/* /root/openwrt/hc5761/package/feeds/
+    - cp qiniu.json /root/openwrt/hc5761/
+    - cd /root/openwrt/hc5761/
+    - sed -i 's/# CONFIG_ALL .*/CONFIG_ALL=y/' .config
+    - make defconfig
+    - make package/compile -i -j V=99
+    - cd bin/ralink/packages/
+    - ../../../scripts/ipkg-make-index.sh . > Packages
+    - gzip -9c Packages > Packages.gz
 
 script:
-    - echo "This is an script segment"
     - pwd
     - ls
-    - cd ~/openwrt/hc5761
-    - make defconfig
-    - echo "CONFIG_PACKAGE_wifidog=m" >> .config
-    - make package/feeds/net/wifidog/compile V=99
-    - ls bin/ralink/packages/wifidog*
+    - cd /root/openwrt/hc5761/
+    - sed -i -e "s|{src}|/root/openwrt/hc5761/bin/ralink/packages/|g" -e "s|{access_key}|$qiniu_access_key|g" -e "s|{secret_key}|$qiniu_secret_key|g" -e "s|{bucket}|downloads-openwrt-io|g" -e "s|{key_prefix}|vendors/gee/ralink/packages/|g" qiniu.json
+    - qrsync --check-exist qiniu.json
+    - qrsctl login $qiniu_user $qiniu_passwd
+    - qrsctl cdn/refresh downloads-openwrt-io http://downloads.openwrt.io/vendors/gee/ralink/packages/Packages.gz
