@@ -14,7 +14,7 @@ PKG_LICENSE:=GPL-2.0
 PKG_MAINTAINER:=sinkcup <sinkcup@163.com>
 
 PKG_SOURCE:=$(PKG_NAME)-gateway-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://downloads.openwrt.io/dl/ \
+PKG_SOURCE_URL:=http://downloads.openwrt.io/sources/ \
     https://github.com/wifidog/wifidog-gateway/releases/download/$(PKG_VERSION)/
 PKG_MD5SUM:=3c9c35968f154b1c9224245a5d708d5f
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-gateway-$(PKG_VERSION)

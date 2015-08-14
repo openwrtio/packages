@@ -14,7 +14,7 @@ PKG_LICENSE:=GPL-2.0
 PKG_MAINTAINER:=sinkcup <sinkcup@163.com>
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://downloads.openwrt.io/dl/ \
+PKG_SOURCE_URL:=http://downloads.openwrt.io/sources/ \
     https://github.com/openwrtio/owmp/releases/download/$(PKG_VERSION)/
 PKG_MD5SUM:=88317da23e065b283f95290324ba8aee
 
