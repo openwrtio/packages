@@ -23,6 +23,7 @@ before_script:
 script:
     - pwd
     - ls
+    - if [ -z $qiniu_access_key ]; then echo waiting daocloud; exit 1; fi
     - cd /root/openwrt/hc5761/
     - sed -i -e "s|{src}|/root/openwrt/hc5761/bin/ralink/packages/|g" -e "s|{access_key}|$qiniu_access_key|g" -e "s|{secret_key}|$qiniu_secret_key|g" -e "s|{bucket}|downloads-openwrt-io|g" -e "s|{key_prefix}|vendors/gee/ralink/packages/|g" qiniu.json
     - qrsync --check-exist qiniu.json
